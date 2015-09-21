@@ -2,7 +2,7 @@ PROGRAM boolean_functions;
 {$RANGECHECKS OFF}
 {$OVERFLOWCHECKS OFF}
 {$PACKENUM 1}
-{$M 16777216,33554432}
+{$M 536870912,2147483648}
 
 
 
@@ -37,14 +37,14 @@ CONST
   variable_max = 64;
   multiple_max = 64;
 
-  term_max = 32767;
-  prime_max = 32767;
-  cube_max = 32767;
+  term_max = 32768;
+  prime_max = 65536;
+  cube_max = 65536;
 
-  count1_max = 32767;
-  count2_max = 32767;
+  count1_max = 65536;
+  count2_max = 65536;
 
-  product_max = 32767;
+  product_max = 65536;
 
   char_max = 5;
 
@@ -528,7 +528,7 @@ BEGIN
                       outcode[term,k] := BOOLEAN(GetBM(@code01,tv,k))
                     END;
                   IF stats_flag THEN
-                    FOR k:=1 TO multiple DO
+                    FOR k:=1 TO variable DO
                       IF outcode[term,k] THEN
                         termtotal[k] := SUCC(termtotal[k]);
                   FOR k:=1 TO variable DO
