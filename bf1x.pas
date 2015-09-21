@@ -5,7 +5,6 @@ PROGRAM boolean_functions;
 {$M 536870912,2147483648}
 
 
-
 (*
  * Copyright (c) 1988-2007 Antonio Costa.
  * All rights reserved.
@@ -37,14 +36,14 @@ CONST
   variable_max = 64;
   multiple_max = 64;
 
-  term_max = 32768;
-  prime_max = 65536;
-  cube_max = 65536;
+  term_max = 50000;
+  prime_max = 50000;
+  cube_max = 50000;
 
-  count1_max = 65536;
-  count2_max = 65536;
+  count1_max = 50000;
+  count2_max = 50000;
 
-  product_max = 65536;
+  product_max = 50000;
 
   char_max = 5;
 
