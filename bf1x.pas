@@ -36,14 +36,14 @@ CONST
   variable_max = 64;
   multiple_max = 64;
 
-  term_max = 50000;
-  prime_max = 50000;
-  cube_max = 50000;
+  term_max = 65536;
+  prime_max = 65536;
+  cube_max = 655360;
 
-  count1_max = 50000;
-  count2_max = 50000;
+  count1_max = 65536;
+  count2_max = 65536;
 
-  product_max = 50000;
+  product_max = 65536;
 
   char_max = 5;
 
@@ -92,6 +92,11 @@ VAR
   out,variable,multiple,term,prime,product: LONGINT;
   flag1,flag2,table_flag,stats_flag: BOOLEAN;
   equat_flag: LONGINT;
+
+  (* "generate_primes" variables *)
+  term1,term2: PACKED ARRAY[1..cube_max] OF input_code;
+  group1,group2: PACKED ARRAY[0..variable_max] OF 0..count2_max;
+  primeflag1,primeflag2: PACKED ARRAY[1..cube_max] OF BOOLEAN;
 
   runtime_error_flag: BOOLEAN;
   env1,env2: jmp_buf;
@@ -550,10 +555,7 @@ END;
 PROCEDURE generate_primes;
 
 VAR 
-  term1,term2: PACKED ARRAY[1..cube_max] OF input_code;
   ones1,ones2: PACKED ARRAY[0..cube_max] OF 0..variable_max;
-  group1,group2: PACKED ARRAY[0..variable_max] OF 0..count2_max;
-  primeflag1,primeflag2: PACKED ARRAY[1..cube_max] OF BOOLEAN;
 
 FUNCTION terms_combine: BOOLEAN;
 
