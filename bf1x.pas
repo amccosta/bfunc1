@@ -6,7 +6,7 @@ PROGRAM boolean_functions;
 
 
 (*
- * Copyright (c) 1988-2007 Antonio Costa.
+ * Copyright (c) 1988-2015 Antonio Costa.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms are permitted
@@ -26,10 +26,10 @@ PROGRAM boolean_functions;
 (*
    BOOLEAN FUNCTIONS - QUINE McCLUSKEY MINIMIZATION
 
-   Version 11.3 - Local Outputs
+   Version 11.4 - Local Outputs
 
    Made by    : ANTONIO COSTA, PORTO, DECEMBER 1986
-   Modified by: ANTONIO COSTA, PORTO, AUGUST 2007
+   Modified by: ANTONIO COSTA, PORTO, NOVEMBER 2015
 *)
 
 CONST 
