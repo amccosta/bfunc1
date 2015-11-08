@@ -121,7 +121,7 @@ BEGIN
     BEGIN
       IF value=0 THEN
         EXIT;
-  (* create entry *)
+      (* create entry *)
       IF spmat^.free<>NIL THEN
         BEGIN
           col_curr_ptr := spmat^.free;
@@ -139,7 +139,7 @@ BEGIN
       spmat^.head := row_curr_ptr;
       EXIT
     END;
-(* entry exists! *)
+  (* entry exists! *)
   row_prev_ptr := NIL;
   row_curr_ptr := spmat^.head;
   continue := TRUE;
@@ -170,11 +170,11 @@ BEGIN
         END;
       IF col_curr_ptr<> NIL THEN (* column exists! *)
         BEGIN
-    (* keep entry *)
+          (* keep entry *)
           col_curr_ptr^.value := SetValue(col_curr_ptr^.value,value,dim,icol);
           IF col_curr_ptr^.value<>0 THEN
             EXIT;
-    (* delete column entry *)
+          (* delete column entry *)
           IF col_prev_ptr<>NIL THEN (* not first column entry *)
             BEGIN
               col_prev_ptr^.next := col_curr_ptr^.next;
@@ -193,27 +193,27 @@ BEGIN
                 spmat^.free := col_curr_ptr;
               EXIT
             END;
-    (* first and unique column entry *)
+          (* first and unique column entry *)
           IF spmat^.free<>NIL THEN
             DISPOSE(col_curr_ptr)
           ELSE
             spmat^.free := col_curr_ptr;
-    (* clean row *)
+          (* clean row *)
           IF row_prev_ptr<>NIL THEN (* not first row entry *)
             BEGIN
               row_prev_ptr^.next := row_curr_ptr^.next;
               DISPOSE(row_curr_ptr);
               EXIT
             END;
-    (* first row entry *)
+          (* first row entry *)
           spmat^.head := row_curr_ptr^.next;
           DISPOSE(row_curr_ptr);
           EXIT
         END;
-  (* column not exists! *)
+      (* column not exists! *)
       IF value=0 THEN (* ignore entry *)
         EXIT;
-  (* create entry *)
+      (* create entry *)
       IF spmat^.free<>NIL THEN
         BEGIN
           col_curr_ptr := spmat^.free;
@@ -227,10 +227,10 @@ BEGIN
       row_curr_ptr^.head := col_curr_ptr;
       EXIT
     END;
-(* row not exists! *)
+  (* row not exists! *)
   IF value=0 THEN (* ignore entry *)
     EXIT;
-(* create entry *)
+  (* create entry *)
   IF spmat^.free<>NIL THEN
     BEGIN
       col_curr_ptr := spmat^.free;
@@ -268,7 +268,7 @@ BEGIN
       GetBM := 0;
       EXIT
     END;
-(* entry exists! *)
+  (* entry exists! *)
   row_curr_ptr := spmat^.head;
   continue := TRUE;
   WHILE continue AND (row_curr_ptr<>NIL) DO
@@ -293,7 +293,7 @@ BEGIN
       GetBM := 0;
       EXIT
     END;
-(* row not exists! *)
+  (* row not exists! *)
   GetBM := 0
 END;
 
@@ -350,7 +350,7 @@ BEGIN
     EXIT;
   IF NOT src_row_exists THEN (* only dst row exists *)
     BEGIN
-(* remove dst row *)
+      (* remove dst row *)
       dst_col_curr_ptr := dst_row_curr_ptr^.head;
       WHILE dst_col_curr_ptr<>NIL DO
         BEGIN
@@ -370,7 +370,7 @@ BEGIN
     END;
   IF NOT dst_row_exists THEN (* only src row exists *)
     BEGIN
-(* create dst row *)
+      (* create dst row *)
       src_col_curr_ptr := src_row_curr_ptr^.head;
       NEW(dst_row_curr_ptr);
       dst_row_curr_ptr^.index := dst_row;
@@ -402,6 +402,8 @@ BEGIN
       EXIT
     END;
   (* src and dst rows exist *)
+  IF src_row_curr_ptr^.head=dst_row_curr_ptr^.head THEN
+    EXIT;
   src_col_curr_ptr := src_row_curr_ptr^.head;
   dst_col_curr_ptr := dst_row_curr_ptr^.head;
   dst_row_curr_ptr^.index := dst_row;
@@ -421,8 +423,7 @@ BEGIN
       src_col_curr_ptr := src_col_curr_ptr^.next;
       dst_col_curr_ptr := dst_col_curr_ptr^.next
     END;
-  WHILE dst_col_curr_ptr<>NIL DO
-(* remove extra columns *)
+  WHILE dst_col_curr_ptr<>NIL DO (* remove extra columns *)
     BEGIN
       dst_col_prev_ptr := dst_col_curr_ptr;
       dst_col_curr_ptr := dst_col_curr_ptr^.next;
@@ -435,3 +436,4 @@ FUNCTION NOTWORD(w:WORD): WORD;
 BEGIN
   NOTWORD := WORD(w=0)
 END;
+
